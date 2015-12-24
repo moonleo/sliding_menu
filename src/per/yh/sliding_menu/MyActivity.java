@@ -1,4 +1,4 @@
-package com.per.sliding_menu;
+package per.yh.sliding_menu;
 
 import android.app.Activity;
 import android.os.Bundle;
