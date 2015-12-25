@@ -5,10 +5,24 @@
               android:layout_height="fill_parent"
 >
 
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Hello World, MyActivity"
-    />
+    <HorizontalScrollView android:layout_width="match_parent"
+                          android:layout_height="match_parent">
+        <LinearLayout
+                android:id="@+id/wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+        >
+            <include
+                    android:id="@+id/menu"
+                    layout="@layout/menu_layout"/>
+            <LinearLayout
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/right"
+                    android:orientation="horizontal"/>
+        </LinearLayout>
+    </HorizontalScrollView>
 </LinearLayout>
 
