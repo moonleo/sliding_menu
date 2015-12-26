@@ -28,6 +28,8 @@ public class MenuView extends HorizontalScrollView {
 
     private int menuRightPaddingDIP = 50;
 
+    boolean open;
+
     public MenuView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -65,9 +67,9 @@ public class MenuView extends HorizontalScrollView {
                 int scrollX = getScrollX();
                 Log.d(TAG, "scrollX:"+scrollX);
                 if(scrollX > (menuWidth >> 1)) {
-                    smoothScrollTo(menuWidth, 0);
+                    open();
                 } else {
-                    smoothScrollTo(0 ,0);
+                    close();
                 }
                 return true;
         }
@@ -93,6 +95,24 @@ public class MenuView extends HorizontalScrollView {
         //菜单透明度
         float menuAlpha = 1.0f - 0.4f*scale;
         ViewHelper.setAlpha(menu, menuAlpha);
+    }
+
+    /**
+     * 判断菜单是否打开
+     * @return
+     */
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void open() {
+        smoothScrollTo(menuWidth, 0);
+        open = true;
+    }
+
+    public void close() {
+        smoothScrollTo(0 ,0);
+        open = false;
     }
 }
 
