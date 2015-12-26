@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import com.nineoldandroids.view.ViewHelper;
 
 /**
  * Created by MoonLeo on 2015/12/25.
@@ -71,6 +72,27 @@ public class MenuView extends HorizontalScrollView {
                 return true;
         }
         return super.onTouchEvent(ev);
+    }
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        float scale = l * 1.0f /menuWidth;
+        //实现抽屉式侧滑
+        ViewHelper.setTranslationX(menu, menuWidth * scale * 0.7f);
+        //实现内容区域的缩放和位移
+        float contentScale = 0.6f + 0.4f*scale;
+        ViewHelper.setPivotX(content, 0);
+        ViewHelper.setPivotY(content, content.getHeight()>>1);
+        ViewHelper.setScaleX(content, contentScale);
+        ViewHelper.setScaleY(content, contentScale);
+        //实现菜单的缩放
+        float menuScale = 1.0f - 0.4f*scale;
+        ViewHelper.setScaleX(menu, menuScale);
+        ViewHelper.setScaleY(menu, menuScale);
+        //菜单透明度
+        float menuAlpha = 1.0f - 0.4f*scale;
+        ViewHelper.setAlpha(menu, menuAlpha);
     }
 }
 
